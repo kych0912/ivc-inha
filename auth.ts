@@ -2,15 +2,10 @@ import NextAuth, { Account } from "next-auth"
 import { db } from "@/lib/db/drizzle"
 import { users } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
-import GoogleProvider from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({ 
     providers: [
-      GoogleProvider({
-        clientId: process.env.GOOGLE_ID!,
-        clientSecret: process.env.GOOGLE_SECRET!,
-      }),
       Credentials({
         credentials: {
           name: { label: 'Name', type: 'text', optional: true },
