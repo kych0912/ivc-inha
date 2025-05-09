@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Drawer from '@/components/drawer';
+import { DrawerMenu } from '@ivc-inha/ui';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsInstagram } from 'react-icons/bs';
 
@@ -81,7 +81,7 @@ export default function LandingLayout({children}: {children: React.ReactNode}) {
             </div>
             
             <div className="flex md:hidden">
-                <Drawer />
+                <DrawerMenu />
             </div>
             </div>
         </div>

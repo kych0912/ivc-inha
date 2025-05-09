@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { AiOutlineMenu } from 'react-icons/ai';
@@ -6,8 +8,8 @@ import {
   SheetContent,
   SheetTrigger,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/src/components/ui/sheet";
+import { Button } from "@/src/components/ui/button";
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 const navigationItems = [
   { text: 'Media', href: '/media' },
@@ -15,7 +17,7 @@ const navigationItems = [
   { text: 'Recruit', href: '/recruit' }
 ];
 
-export default function DrawerMenu() {
+export function DrawerMenu() {
 
   return (
     <Sheet>

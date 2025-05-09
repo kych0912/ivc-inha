@@ -1,6 +1,13 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "jsx": "preserve",
+        "incremental": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["./*"]
+        }
     },
     "include": ["src"],
     "exclude": ["node_modules"]
