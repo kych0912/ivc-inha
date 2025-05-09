@@ -38,7 +38,7 @@ const mediaItems = [
 // 미디어 항목 컴포넌트
 const MediaItem = ({ item }: { item: typeof mediaItems[number] }) => (
   <Link href={item.href} className="no-underline">
-    <div className="flex justify-center py-5 items-center border-t border-white">
+    <div className="flex justify-center py-10 items-center border-t border-white">
       <div className="justify-center w-[30%]">
         <p className="text-start text-white text-xs md:text-xl font-['SUIT_Variable'] font-bold justify-center items-center">
           {item.category}
@@ -55,8 +55,8 @@ const MediaItem = ({ item }: { item: typeof mediaItems[number] }) => (
 
 export default function Media() {
   return (
-    <div className="w-full bg-[#1b1b1b] h-[120vh] md:h-[150%]">
-      <div className="px-2 flex justify-center items-center flex-col pt-40">
+    <div className="w-full bg-[#1b1b1b] h-[120vh]">
+      <div className="h-full px-2 flex justify-center items-center flex-col">
         <div className="pb-5 flex justify-center items-center flex-col">
           <h1 className="text-white text-5xl font-['SUIT_Variable'] font-bold mb-10">
             MEDIA

@@ -3,7 +3,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-  } from "@/components/ui/accordion"
+  } from "@ivc-inha/ui"
 
   function ContactAccordion() {
     return (
@@ -61,8 +61,8 @@ import {
 
 export default function Contact() {
   return (
-    <div className="w-full bg-[#1b1b1b]">
-      <div className="flex flex-col items-start justify-start pt-30">
+    <div className="flex flex-col justify-center items-center w-full h-[100vh] bg-[#1b1b1b]">
+      <div className="flex flex-col items-start justify-start pt-30 w-full">
         <div className="pb-10">
           <p className="text-white text-4xl font-bold">
             Email
@@ -88,7 +88,7 @@ export default function Contact() {
           </p>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center pb-24">
+      <div className="flex flex-col items-center justify-center pb-24 w-full">
         <h1 className="text-white text-5xl font-bold pb-12">
           FAQ
         </h1>
