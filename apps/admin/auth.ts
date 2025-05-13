@@ -37,17 +37,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }),
     ],
     callbacks: {
-      async signIn({ account }: { account: Account | null }) {
-        if(!account) return false;
-        
-        return true;
-      },
-    async session({ session }) {
-        return session;
-      },
-      authorized({ auth }) {
-        return !!auth;
-      },
+      async session({ session }) {
+          return session;
+        },
+        authorized({ auth }) {
+          return !!auth;
+        },
     },
     session: {
       strategy: 'jwt',

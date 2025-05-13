@@ -21,6 +21,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@ivc-inha/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2
@@ -103,6 +106,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@ivc-inha/api':
+        specifier: workspace:*
+        version: link:../../packages/api
       '@ivc-inha/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -188,9 +194,24 @@ importers:
 
   packages/api:
     dependencies:
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
+      drizzle-kit:
+        specifier: ^0.30.6
+        version: 0.30.6
+      drizzle-orm:
+        specifier: ^0.41.0
+        version: 0.41.0(@types/pg@8.15.0)(gel@2.1.0)(pg@8.15.6)(postgres@3.4.5)
+      postgres:
+        specifier: ^3.4.5
+        version: 3.4.5
       react:
         specifier: ^19.1.0
         version: 19.1.0
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   packages/ui:
     dependencies:

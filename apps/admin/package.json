@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev --turbopack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +12,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
+    "@ivc-inha/ui": "workspace:*",
     "next": "15.3.0-canary.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
