@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ivc-inha/ui": "workspace:*",
+    "@ivc-inha/api": "workspace:*",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
