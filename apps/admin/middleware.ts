@@ -28,6 +28,7 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL('/login', req.url));
     }
     
+    // 3. 공개 또는 보호된 라우트가 아니면 로그인 페이지로 리다이렉트
     if(!isProtectedRoute && !isPublicRoute){
         if(session){
             return NextResponse.redirect(new URL('/dashboard', req.url))
