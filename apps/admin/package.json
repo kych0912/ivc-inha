@@ -13,6 +13,7 @@
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
     "@ivc-inha/ui": "workspace:*",
+    "@ivc-inha/api": "workspace:*",
     "@supabase/supabase-js": "^2.49.4",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",

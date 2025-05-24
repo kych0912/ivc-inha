@@ -21,6 +21,13 @@ export const files = pgTable('files',{
     userId: integer('user_id').references(() => users.id),
 });
 
+export const formlink = pgTable('formlink',{
+    id: serial('id').primaryKey(),
+    link: text('link').notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const userRelations = relations(users, ({ many }) => ({
     files: many(files),
 }));

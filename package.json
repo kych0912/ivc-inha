@@ -11,10 +11,10 @@
     "start": "pnpm --filter web start",
     "db:setup": "pnpm --filter web db:setup",
     "db:seed": "pnpm --filter web db:seed",
-    "db:generate": "pnpm --filter web db:generate",
-    "db:migrate": "pnpm --filter web db:migrate",
-    "db:studio": "pnpm --filter web db:studio",
-    "db:reset": "pnpm --filter web db:reset"
+    "db:generate": "pnpm --filter api db:generate",
+    "db:migrate": "pnpm --filter api db:migrate",
+    "db:studio": "pnpm --filter api db:studio",
+    "db:reset": "pnpm --filter api db:reset"
   },
   "keywords": [],
   "author": "",

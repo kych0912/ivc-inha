@@ -1,5 +1,7 @@
 'use server'
 import { supabase } from '../lib/supabase';
+import { db } from '../db/drizzle';
+import { files, formlink } from '../db/schema';
 
 export async function uploadFileAction(formData: FormData) {
     try {
@@ -34,6 +36,17 @@ export async function uploadFileAction(formData: FormData) {
             .from('resume')
             .getPublicUrl(`files/${uniqueFileName}`);
 
+        const result = await db.insert(files).values({
+            name: uniqueFileName,
+            time: new Date(),
+            fullPath: publicUrl,
+            path: data.path
+        }).returning();
+
+        if (!result) {
+            throw new Error('파일 업로드 중 오류가 발생했습니다.');
+        }
+
         return {
             success: true,
             fileName: uniqueFileName,
@@ -44,5 +57,16 @@ export async function uploadFileAction(formData: FormData) {
     } catch (error) {
         console.error('Upload error:', error);
         throw new Error('파일 업로드 중 오류가 발생했습니다.');
+    }
+}
+
+export async function updateFormLink(formLink: string) {
+    try {
+        const result = await db.insert(formlink).values({
+            link: formLink
+        }).returning();
+    } catch (error) {
+        console.error('Update form link error:', error);
+        throw new Error('폼 링크 업데이트 중 오류가 발생했습니다.');
     }
 }
