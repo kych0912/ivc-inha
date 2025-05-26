@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local'
+import { UserProvider } from '@/lib/auth/userContext';
+import { getUser } from "@/lib/db/queries";
+
 import "./globals.css";
 
 const SUIT = localFont({
@@ -17,13 +20,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userPromise = getUser();
+
   return (
     <html lang="en">
-      <body
-        className={`${SUIT.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <UserProvider userPromise={userPromise}>
+        <body
+          className={`${SUIT.variable} antialiased bg-gray-50`}
+        >
+          {children}
+        </body>
+      </UserProvider>
     </html>
   );
 }

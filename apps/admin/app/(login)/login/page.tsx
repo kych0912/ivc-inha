@@ -5,12 +5,17 @@ import { Button } from '@ivc-inha/ui';
 import { Input } from '@ivc-inha/ui';
 import { Label } from '@ivc-inha/ui';
 import { CircleIcon, Loader2 } from 'lucide-react';
-import { signIn } from './actions';
+import { signIn, signUp } from './actions';
 import { ActionState } from '@/lib/auth/middleware';
 
 export default function Login() {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
     signIn,
+    { error: '' },
+  );
+
+  const [stateSignUp, formActionSignUp, pendingSignUp] = useActionState<ActionState, FormData>(
+    signUp,
     { error: '' },
   );
 
@@ -73,7 +78,7 @@ export default function Login() {
           </div>
 
           {state?.error && (
-            <div className="text-red-500 text-sm">{state.error}</div>
+            <div className="text-red-500 text-sm">{state.message}</div>
           )}
 
           <div>
@@ -96,6 +101,32 @@ export default function Login() {
           </div>
         </form>
 
+
+        <form action={formActionSignUp}>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            defaultValue={stateSignUp.email}
+            required
+            maxLength={100}
+            className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-muted-foreground text-foreground focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
+            placeholder="Enter your email"
+          />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="password"
+            defaultValue={stateSignUp.password}
+            required
+            maxLength={100}
+            className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-muted-foreground text-foreground focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
+            placeholder="Enter your password"
+          />
+          <Button type="submit">Signup</Button>
+        </form>
       </div>
     </div>
   );
