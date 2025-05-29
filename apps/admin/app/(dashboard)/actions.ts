@@ -1,6 +1,6 @@
 'use server';
 
-import { uploadFileAction } from '@ivc-inha/api';
+import { uploadFileAction, updateFormLink } from '@ivc-inha/api';
 import { validatedAction } from '@/lib/auth/middleware';
 import { z } from 'zod';
 
@@ -22,11 +22,19 @@ export const uploadResumeAction = validatedAction(uploadResumeSchema,
     }
 );
 
-export const updateFormLinkAction = validatedAction(z.object({
+const updateFormLinkSchema = z.object({
     link: z.string(),
-}),
+});
+
+export const updateFormLinkAction = validatedAction(updateFormLinkSchema,
     async (data, formData) => {
-        console.log(formData)
+        try{
+            await updateFormLink(formData);
+            return { success: '폼 링크가 성공적으로 업데이트되었습니다.' };
+        } catch (error) {
+            console.error('Update error:', error);
+            return { error: '폼 링크 업데이트 중 오류가 발생했습니다.' };
+        }
     }
 );
 

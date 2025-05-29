@@ -4,6 +4,9 @@ import { XCircleIcon } from 'lucide-react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@ivc-inha/ui';
 import { useFormStatus } from 'react-dom';
 import { useFileUpload } from '../hooks/useFileUpload';
+import { useActionState } from 'react';
+import { updateFormLinkAction } from '../actions';
+import { ActionState } from '@/lib/auth/middleware';
 
 function SubmitButton() {
     const { pending } = useFormStatus();
@@ -31,6 +34,11 @@ export default function Dashboard() {
         onClickFileUpload,
         handleReset,
     } = useFileUpload();
+    
+    const [linkState, linkAction, _] = useActionState<ActionState, FormData>(
+        updateFormLinkAction,
+        { error: '' },
+    );
 
     return (
     <div >
@@ -45,9 +53,7 @@ export default function Dashboard() {
                     <form
                         ref={formRef}
                         action={async (formData) => {
-                            formData.set('base64File', file);
-                            formData.set('fileName', name);
-                            await formAction(formData);
+                            await linkAction(formData);
                         }}
                     >
                         <Input
@@ -58,6 +64,13 @@ export default function Dashboard() {
                             required
                         />
 
+                        {linkState.error && (
+                            <p className="mt-2 text-red-500">{linkState.error}</p>
+                        )}
+
+                        {linkState.success && (
+                            <p className="mt-2 text-green-500">{linkState.success}</p>
+                        )}
                         <SubmitButton />
                     </form>
                 </CardContent>

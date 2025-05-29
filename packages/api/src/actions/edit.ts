@@ -60,11 +60,22 @@ export async function uploadFileAction(formData: FormData) {
     }
 }
 
-export async function updateFormLink(formLink: string) {
+export async function updateFormLink(formData: FormData) {
     try {
+        const link = formData.get('link');
+
+        if(!link) {
+            throw new Error('링크가 누락되었습니다.');
+        }
+
         const result = await db.insert(formlink).values({
-            link: formLink
+            link: link.toString()
         }).returning();
+
+        return {
+            success: true,
+            link: link.toString()
+        };
     } catch (error) {
         console.error('Update form link error:', error);
         throw new Error('폼 링크 업데이트 중 오류가 발생했습니다.');
