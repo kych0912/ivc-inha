@@ -26,6 +26,7 @@ export const formlink = pgTable('formlink',{
     link: text('link').notNull(),
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
+    selected: boolean('selected').notNull().default(false),
 });
 
 export const userRelations = relations(users, ({ many }) => ({
