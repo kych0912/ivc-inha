@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@ivc-inha/ui';
+import { Button } from '@/components/ui';
 import { Settings, Menu, Database } from 'lucide-react';
 
 export default function DashboardLayout({

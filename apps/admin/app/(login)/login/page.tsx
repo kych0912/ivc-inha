@@ -1,9 +1,9 @@
 'use client';
 
 import { useActionState } from 'react';
-import { Button } from '@ivc-inha/ui';
-import { Input } from '@ivc-inha/ui';
-import { Label } from '@ivc-inha/ui';
+import { Button } from '@/components';
+import { Input } from '@/components';
+import { Label } from '@/components';
 import { CircleIcon, Loader2 } from 'lucide-react';
 import { signIn, signUp } from './actions';
 import { ActionState } from '@/lib/auth/middleware';

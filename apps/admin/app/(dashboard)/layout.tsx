@@ -2,15 +2,15 @@
 
 import Link from 'next/link';
 import { useState, use } from 'react';
-import { Button } from '@ivc-inha/ui';
+import { Button } from '@/components/ui/button';
 import { CircleIcon, Home, LogOut, Settings, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from '@ivc-inha/ui';
-import { Avatar, AvatarFallback, AvatarImage } from '@ivc-inha/ui';
+} from '@/components/ui';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui';
 import { signOut } from 'next-auth/react';
 import { useUser } from '@/lib/auth/userContext';
 
@@ -32,10 +32,9 @@ function Header() {
           <span className="ml-2 text-xl font-semibold text-foreground">ACME</span>
         </Link>
         <div className="flex items-center space-x-4">
-          {
-          user ? (
-              <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-                <DropdownMenuTrigger>
+          {user ? (
+            <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <DropdownMenuTrigger>
                 <Avatar className="cursor-pointer size-9">
                   <AvatarImage alt={user.name || ''} />
                   <AvatarFallback>
@@ -53,14 +52,13 @@ function Header() {
                     <span>대시보드</span>
                   </Link>
                 </DropdownMenuItem>
-                <form action={handleSignOut} className="w-full">
-                  <button type="submit" className="flex w-full">
-                    <DropdownMenuItem className="w-full flex-1 cursor-pointer">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      <span>로그아웃</span>
-                    </DropdownMenuItem>
-                  </button>
-                </form>
+                <DropdownMenuItem 
+                  className="cursor-pointer"
+                  onClick={handleSignOut}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>로그아웃</span>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (

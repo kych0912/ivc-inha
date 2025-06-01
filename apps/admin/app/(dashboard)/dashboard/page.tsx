@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { XCircleIcon } from 'lucide-react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@ivc-inha/ui';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@/components/ui';
 import { useFormStatus } from 'react-dom';
 import { useFileUpload } from '../hooks/useFileUpload';
 import { useActionState } from 'react';
