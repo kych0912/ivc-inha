@@ -1,0 +1,1 @@
+ALTER TABLE "formlink" ADD COLUMN "selected" boolean DEFAULT false NOT NULL;
