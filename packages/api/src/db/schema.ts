@@ -29,6 +29,14 @@ export const formlink = pgTable('formlink', {
   selected: boolean('selected').notNull().default(false),
 });
 
+export const published = pgTable('published', {
+  id: serial('id').primaryKey(),
+  from: timestamp('from').notNull(),
+  to: timestamp('to').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const userRelations = relations(users, ({ many }) => ({
   files: many(files),
 }));
