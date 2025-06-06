@@ -7,7 +7,7 @@ import { updatePublishedAction } from '../actions';
 import { DatePickerWithRange } from '@/components/RangeDatePicker';
 import { useActionState } from 'react';
 import { ActionState } from '@/lib/auth/middleware';
-import { SubmitButton } from './page';
+import SubmitButton from '@/components/Submitbutton';
 import { useQueryClient } from '@tanstack/react-query';
 import RenderComponent from '@/components/RenderComponent';
 import PublishTime from './db/PublishTime';
