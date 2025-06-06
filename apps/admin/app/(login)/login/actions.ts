@@ -96,7 +96,7 @@ export async function signUpUserInterface({
   };
 }
 
-export const signUp = validatedAction(signInSchema, async (data, formData) => {
+export const signUp = validatedAction(signInSchema, async (data) => {
   const { email, password } = data;
 
   const userResult = await signUpUserInterface({
@@ -108,7 +108,7 @@ export const signUp = validatedAction(signInSchema, async (data, formData) => {
     return userResult.error;
   }
 
-  const user = userResult.value;
+  // const user = userResult.value;
 
   redirect('/dashboard');
 });

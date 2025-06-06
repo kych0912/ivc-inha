@@ -2,17 +2,17 @@
 
 import { useActionState } from 'react';
 import { Button, Input, Label } from '@/components/ui';
-import { CircleIcon, Loader2 } from 'lucide-react';
-import { signIn, signUp } from './actions';
+import { Loader2 } from 'lucide-react';
+import { signIn } from './actions';
 import { ActionState } from '@/lib/auth/middleware';
 
 export default function Login() {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(signIn, { error: '' });
 
-  const [stateSignUp, formActionSignUp, pendingSignUp] = useActionState<ActionState, FormData>(
-    signUp,
-    { error: '' },
-  );
+  // const [stateSignUp, formActionSignUp, pendingSignUp] = useActionState<ActionState, FormData>(
+  //   signUp,
+  //   { error: '' },
+  // );
 
   return (
     <div className="min-h-[100dvh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">

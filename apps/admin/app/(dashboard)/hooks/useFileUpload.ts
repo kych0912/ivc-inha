@@ -19,10 +19,9 @@ export function useFileUpload(): UseFileUploadReturn {
   const [file, setFile] = React.useState<string>('');
   const [name, setName] = React.useState('');
   const formRef = React.useRef<HTMLFormElement | null>(null);
-  const [state, formAction, _] = useActionState<ActionState, FormData>(
-    uploadResumeAction,
-    { error: '' },
-  );
+  const [state, formAction] = useActionState<ActionState, FormData>(uploadResumeAction, {
+    error: '',
+  });
 
   const onDropFiles = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ export function useFileUpload(): UseFileUploadReturn {
   };
 
   const handleFileSelection = async (file: File) => {
-    if (file.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+    if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
       alert('docx 파일만 가능합니다.');
       return;
     }
@@ -70,7 +69,7 @@ export function useFileUpload(): UseFileUploadReturn {
   const encodeFileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file);    
+      reader.readAsDataURL(file);
       reader.onload = (event) => resolve(event.target?.result as string);
       reader.onerror = (error) => reject(error);
     });
@@ -87,4 +86,4 @@ export function useFileUpload(): UseFileUploadReturn {
     onClickFileUpload,
     handleReset,
   };
-} 
+}
