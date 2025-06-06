@@ -5,22 +5,7 @@ import { AlertCircle } from 'lucide-react';
 import { LinkItem, ListItem } from './ListItem';
 import { useLinkList, useFileList, useGetPublished } from '@/hooks/queries';
 import PublishTime from './PublishTime';
-export const RenderConomponent = ({
-  isLoading,
-  children,
-}: {
-  isLoading: boolean;
-  children: React.ReactNode;
-}) => {
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-  return children;
-};
+import RenderComponent from '@/components/RenderComponent';
 
 export default function DB() {
   const { data: linkList = [], isLoading: isLinkLoading } = useLinkList();
@@ -34,7 +19,7 @@ export default function DB() {
             <CardTitle>제목</CardTitle>
           </CardHeader>
           <CardContent>
-            <RenderConomponent isLoading={isLinkLoading}>
+            <RenderComponent isLoading={isLinkLoading}>
               {linkList.length > 0 ? (
                 <ul className="space-y-4">
                   {linkList.map((link) => {
@@ -52,7 +37,7 @@ export default function DB() {
                   </p>
                 </div>
               )}
-            </RenderConomponent>
+            </RenderComponent>
           </CardContent>
         </Card>
       </div>
@@ -63,7 +48,7 @@ export default function DB() {
             <CardTitle>첨부파일</CardTitle>
           </CardHeader>
           <CardContent>
-            <RenderConomponent isLoading={isFileLoading}>
+            <RenderComponent isLoading={isFileLoading}>
               {fileList.length > 0 ? (
                 <ul className="space-y-4">
                   {fileList.map((file) => {
@@ -81,7 +66,7 @@ export default function DB() {
                   </p>
                 </div>
               )}
-            </RenderConomponent>
+            </RenderComponent>
           </CardContent>
         </Card>
       </div>
@@ -92,9 +77,9 @@ export default function DB() {
             <CardTitle>게시 기간</CardTitle>
           </CardHeader>
           <CardContent>
-            <RenderConomponent isLoading={isPublishedLoading}>
+            <RenderComponent isLoading={isPublishedLoading}>
               <PublishTime published={published} />
-            </RenderConomponent>
+            </RenderComponent>
           </CardContent>
         </Card>
       </div>

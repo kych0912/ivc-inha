@@ -9,7 +9,7 @@ import { useActionState } from 'react';
 import { ActionState } from '@/lib/auth/middleware';
 import { SubmitButton } from './page';
 import { useQueryClient } from '@tanstack/react-query';
-import { RenderConomponent } from './db/page';
+import RenderComponent from '@/components/RenderComponent';
 import PublishTime from './db/PublishTime';
 export default function DateCard({
   published,
@@ -44,7 +44,7 @@ export default function DateCard({
         <CardTitle>모집 기간</CardTitle>
       </CardHeader>
       <CardContent>
-        <RenderConomponent isLoading={isPublishedLoading}>
+        <RenderComponent isLoading={isPublishedLoading}>
           <PublishTime published={published} />
           <form className="mt-4" action={publishedAction}>
             <input
@@ -80,7 +80,7 @@ export default function DateCard({
               <p className="mt-2 text-green-500">{publishedState.success}</p>
             )}
           </form>
-        </RenderConomponent>
+        </RenderComponent>
       </CardContent>
     </Card>
   );
