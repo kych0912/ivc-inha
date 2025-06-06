@@ -11,38 +11,62 @@ function Spinner() {
 
 export function LinkButton({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
-  const handleClick = async () => {
+
+  const handleDownload = async () => {
     try {
-      setIsLoading(true);
+      const result = await getFilesAction();
+      if (result.error) throw new Error(result.error);
+
+      const { data, name } = result;
+      if (!data || !name) throw new Error('파일을 찾을 수 없습니다.');
+      const url = URL.createObjectURL(data);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // URL 객체 해제
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : '파일 다운로드 중 오류가 발생했습니다.');
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const formLinkResult = await getFormLinkAction();
+      if (typeof formLinkResult === 'string') {
+        window.open(formLinkResult, '_blank');
+      } else if (formLinkResult.error) {
+        throw new Error(formLinkResult.error);
+      } else {
+        throw new Error('오류가 발생했습니다.');
+      }
+    } catch (error) {
+      alert(
+        error instanceof Error
+          ? error.message
+          : '지원서 제출 링크를 가져오는 중 오류가 발생했습니다.',
+      );
+    }
+  };
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    try {
       switch (children) {
         case '지원서 다운로드':
-          const { data, name } = await getFilesAction();
-          console.log(name);
-          const url = URL.createObjectURL(data);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = name;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          await handleDownload();
           break;
         case '지원서 제출':
-          const formLink = await getFormLinkAction();
-          window.open(formLink, '_blank');
-          break;
-        default:
+          await handleSubmit();
           break;
       }
+    } finally {
       setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof Error) {
-        console.error('Error:', error.message);
-        alert(error.message);
-      } else {
-        console.error('Error:', error);
-        alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      }
     }
   };
 
