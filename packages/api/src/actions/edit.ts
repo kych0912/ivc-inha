@@ -37,7 +37,7 @@ export async function uploadFileAction(formData: FormData) {
     const result = await db
       .insert(files)
       .values({
-        name: uniqueFileName,
+        name: fileName,
         time: new Date(),
         fullPath: publicUrl,
         path: data.path,
@@ -62,8 +62,7 @@ export async function uploadFileAction(formData: FormData) {
 
 export async function deleteFileAction(path: string) {
   try {
-    const result = await supabase.storage.from('resume').remove([path]);
-    console.log(result);
+    await supabase.storage.from('resume').remove([path]);
   } catch (error) {
     console.error('Delete file error:', error);
     throw new Error('파일 삭제 중 오류가 발생했습니다.');
@@ -78,7 +77,7 @@ export async function updateFormLink(formData: FormData) {
       throw new Error('링크가 누락되었습니다.');
     }
 
-    const result = await db
+    await db
       .insert(formlink)
       .values({
         link: link.toString(),

@@ -1,8 +1,11 @@
 import { eq, ne, desc } from 'drizzle-orm';
 import { db } from './drizzle';
-import { files, users, formlink } from './schema';
+import { files, users, formlink, published } from './schema';
+import type { InferSelectModel } from 'drizzle-orm';
 
 type UpdateType = 'file' | 'link';
+type FileType = InferSelectModel<typeof files>;
+type LinkType = InferSelectModel<typeof formlink>;
 
 export async function getUser(email: string) {
   const user = await db.select().from(users).where(eq(users.email, email)).limit(1);
@@ -22,6 +25,15 @@ export async function getFileList() {
 export async function getLinkList() {
   const linkList = await db.select().from(formlink).orderBy(desc(formlink.id));
   return linkList;
+}
+
+export async function getPublishedDate() {
+  const publishedDate = await db
+    .select()
+    .from(published)
+    .orderBy(desc(published.createdAt))
+    .limit(1);
+  return publishedDate;
 }
 
 export async function updateSelected(type: UpdateType, id: number, selected: boolean) {
@@ -56,3 +68,22 @@ export const deleteItem = async (type: UpdateType, id: number) => {
       break;
   }
 };
+
+export async function getSelectedItem(type: 'file'): Promise<FileType[]>;
+export async function getSelectedItem(type: 'link'): Promise<LinkType[]>;
+export async function getSelectedItem(type: UpdateType): Promise<FileType[] | LinkType[]> {
+  switch (type) {
+    case 'file':
+      return await db.select().from(files).where(eq(files.selected, true));
+    case 'link':
+      return await db.select().from(formlink).where(eq(formlink.selected, true));
+  }
+}
+
+export async function updatePublished(from: Date | null, to: Date | null) {
+  if (from && to) {
+    await db.insert(published).values({ from, to });
+  } else {
+    throw new Error('모집 기간이 설정되지 않았습니다.');
+  }
+}

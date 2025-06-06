@@ -3,9 +3,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { AlertCircle } from 'lucide-react';
 import { LinkItem, ListItem } from './ListItem';
-import { useLinkList, useFileList } from '@/hooks/queries';
-
-const RenderConomponent = ({
+import { useLinkList, useFileList, useGetPublished } from '@/hooks/queries';
+import PublishTime from './PublishTime';
+export const RenderConomponent = ({
   isLoading,
   children,
 }: {
@@ -25,6 +25,7 @@ const RenderConomponent = ({
 export default function DB() {
   const { data: linkList = [], isLoading: isLinkLoading } = useLinkList();
   const { data: fileList = [], isLoading: isFileLoading } = useFileList();
+  const { data: published = [], isLoading: isPublishedLoading } = useGetPublished();
   return (
     <div>
       <div className="p-4">
@@ -80,6 +81,19 @@ export default function DB() {
                   </p>
                 </div>
               )}
+            </RenderConomponent>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="p-4">
+        <Card>
+          <CardHeader className="pb-0">
+            <CardTitle>게시 기간</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RenderConomponent isLoading={isPublishedLoading}>
+              <PublishTime published={published} />
             </RenderConomponent>
           </CardContent>
         </Card>

@@ -1,18 +1,13 @@
 'use client';
 
 import { useActionState } from 'react';
-import { Button } from '@/components';
-import { Input } from '@/components';
-import { Label } from '@/components';
+import { Button, Input, Label } from '@/components/ui';
 import { CircleIcon, Loader2 } from 'lucide-react';
 import { signIn, signUp } from './actions';
 import { ActionState } from '@/lib/auth/middleware';
 
 export default function Login() {
-  const [state, formAction, pending] = useActionState<ActionState, FormData>(
-    signIn,
-    { error: '' },
-  );
+  const [state, formAction, pending] = useActionState<ActionState, FormData>(signIn, { error: '' });
 
   const [stateSignUp, formActionSignUp, pendingSignUp] = useActionState<ActionState, FormData>(
     signUp,
@@ -22,22 +17,14 @@ export default function Login() {
   return (
     <div className="min-h-[100dvh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <CircleIcon className="h-12 w-12 text-orange-500" />
-        </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            {"Login"}
-        </h2>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">{'Login'}</h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <form className="space-y-6" action={formAction}>
           <div>
-            <Label
-              htmlFor="email"
-              className="block text-sm font-medium text-muted-foreground"
-            >
-              {"Email"}
+            <Label htmlFor="email" className="block text-sm font-medium text-muted-foreground">
+              {'Email'}
             </Label>
             <div className="mt-1">
               <Input
@@ -55,11 +42,8 @@ export default function Login() {
           </div>
 
           <div>
-            <Label
-              htmlFor="password"
-              className="block text-sm font-medium text-muted-foreground"
-            >
-              {"Password"}
+            <Label htmlFor="password" className="block text-sm font-medium text-muted-foreground">
+              {'Password'}
             </Label>
             <div className="mt-1">
               <Input
@@ -77,9 +61,7 @@ export default function Login() {
             </div>
           </div>
 
-          {state?.error && (
-            <div className="text-red-500 text-sm">{state.message}</div>
-          )}
+          {state?.error && <div className="text-red-500 text-sm">{state.message}</div>}
 
           <div>
             <Button
@@ -95,14 +77,13 @@ export default function Login() {
                   Loading...
                 </>
               ) : (
-                "Login"
+                'Login'
               )}
             </Button>
           </div>
         </form>
 
-
-        <form action={formActionSignUp}>
+        {/* <form action={formActionSignUp}>
           <Input
             id="email"
             name="email"
@@ -126,7 +107,7 @@ export default function Login() {
             placeholder="Enter your password"
           />
           <Button type="submit">Signup</Button>
-        </form>
+        </form> */}
       </div>
     </div>
   );

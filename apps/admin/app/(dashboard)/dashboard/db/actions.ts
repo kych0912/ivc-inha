@@ -6,6 +6,7 @@ import {
   updateUnSelectedAll,
   deleteItem,
   deleteFileAction,
+  getPublishedDate,
 } from '@ivc-inha/api';
 
 export async function updateSelectedFileAction(id: number, selected: boolean) {
@@ -46,6 +47,14 @@ export async function getFiles() {
   }
 }
 
+export async function getPublished() {
+  try {
+    const published = await getPublishedDate();
+    return published;
+  } catch (error) {
+    console.error(error);
+  }
+}
 export async function deleteItemAction(type: 'link' | 'file', id: number, path?: string) {
   try {
     await deleteItem(type, id);

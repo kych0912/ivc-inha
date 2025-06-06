@@ -1,4 +1,4 @@
-import { getFiles } from '@/app/(dashboard)/dashboard/db/actions';
+import { getFiles, getPublished } from '@/app/(dashboard)/dashboard/db/actions';
 import { useQuery } from '@tanstack/react-query';
 import { getLinks } from '@/app/(dashboard)/dashboard/db/actions';
 
@@ -16,6 +16,16 @@ export const useFileList = () => {
   return useQuery({
     queryKey: ['files'],
     queryFn: getFiles,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+  });
+};
+
+export const useGetPublished = () => {
+  return useQuery({
+    queryKey: ['published'],
+    queryFn: getPublished,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     retry: false,
